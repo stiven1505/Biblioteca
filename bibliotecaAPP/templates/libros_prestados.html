@@ -1,0 +1,26 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+  <br /><br />
+  <h2 class="text-center">Libros Prestados</h2>
+  <br /><br />
+  <ul class="list-group">
+    {% for loan in loans %}
+    <br /><li class="list-group-item">
+      <strong>Título:</strong> {{ loan.book.title }}<br />
+      <strong>Autor:</strong> {{ loan.book.author }}<br />
+      <strong>Año de Publicación:</strong> {{ loan.book.publication_year }}<br />
+      <strong>Fecha de Préstamo:</strong> {{ loan.loan_date }}<br />
+    </li>
+    {% if not loan.delivery_status %}
+    <a href="{% url 'return_book' loan.id %}" class="btn btn-warning"
+      >Entregar</a
+    >
+    {% else %}
+    <span class="text-success">Entregado</span>
+    {% endif %} {% empty %}
+    <li class="list-group-item">No tienes libros prestados en este momento.</li>
+    <br />
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

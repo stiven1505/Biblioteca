@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <br><br><h2 class="text-center">Lista de Libros Disponibles</h2><br><br>
+    <ul class="list-group">
+        {% for book in books %}
+        <li class="list-group-item">
+            <strong>Título:</strong> {{ book.title }}<br>
+            <strong>Autor:</strong> {{ book.author }}<br>
+            <strong>Año de Publicación:</strong> {{ book.publication_year }}<br>
+            <strong>Stock:</strong> {{ book.stock }}<br>
+ 
+        </li>
+        {% if user.is_authenticated %}
+        <a href="{% url 'borrow_book' book.id %}" class="btn btn-primary">Tomar Prestado</a> <br> <br>
+
+    {% endif %}
+        {% empty %}
+        <li
+         class="list-group-item">No hay libros registrados.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

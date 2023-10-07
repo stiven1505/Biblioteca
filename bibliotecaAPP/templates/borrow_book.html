@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Tomar o Devolver un Libro</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Enviar</button>
+  </form>
+  <a href="{% url 'book_list' %}">Volver al listado de libros</a>
+{% endblock %}

@@ -1,0 +1,49 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="/">Biblioteca</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a href="{% url 'listarLibros' %}" class="nav-link">Libros Disponibles</a>
+          </li>
+          {% if user.is_authenticated %}
+          
+            <li class="nav-item">
+              <a href="{% url 'libros_prestados' %}" class="nav-link">Libros Prestados</a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'historial_libros' %}" class="nav-link">Historial</a>
+            </li>
+            {% if user.is_superuser %}
+            <!-- Mostrar el enlace solo si el usuario es un superusuario -->
+            <li class="nav-item">
+              <a href="{% url 'add_book' %}" class="nav-link">Agregar Libro</a>
+            </li>
+          {% endif %}
+            <li class="nav-item">
+              <a href="{% url 'logout' %}" class="nav-link">Logout</a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a href="{% url 'register' %}" class="nav-link">Registrarse</a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'login' %}" class="nav-link">Login</a>
+            </li>
+          {% endif %}
+        </ul>
+        
+      </div>
+    </div>
+  </nav>
